@@ -26,7 +26,7 @@ function ClerkWithTheme({ children }) {
         baseTheme: resolvedTheme === "dark" ? dark : undefined,
         variables: {
           colorPrimary: "oklch(0.6 0.15 250)", // Match your primary color
-        },
+                  },
       }}
     >
       {children}
