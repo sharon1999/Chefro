@@ -2,8 +2,11 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import { ChefHat, ShoppingBasket, Sparkles, ArrowRight, CheckCircle2 } from "lucide-react";
+import { auth } from "@clerk/nextjs/server";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground overflow-hidden">
       {/* Hero Section */}
@@ -25,17 +28,28 @@ export default function Home() {
               ChefroAI transforms your pantry ingredients into masterclass meals. Discover new recipes, manage your groceries, and elevate your cooking experience with the power of AI.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <Link href="/recipes">
-                <Button size="lg" className="w-full sm:w-auto rounded-full group">
-                  Get Started Free
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link href="/pantry">
-                <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full">
-                  Explore Pantry
-                </Button>
-              </Link>
+              {userId ? (
+                <Link href="/dashboard">
+                  <Button size="lg" className="w-full sm:w-auto rounded-full group shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all">
+                    Go to Dashboard
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/recipes">
+                    <Button size="lg" className="w-full sm:w-auto rounded-full group">
+                      Get Started Free
+                      <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </Link>
+                  <Link href="/pantry">
+                    <Button size="lg" variant="outline" className="w-full sm:w-auto rounded-full">
+                      Explore Pantry
+                    </Button>
+                  </Link>
+                </>
+              )}
             </div>
             <div className="flex items-center justify-center lg:justify-start gap-6 text-sm text-muted-foreground pt-4">
               <div className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-primary" /> No credit card required</div>

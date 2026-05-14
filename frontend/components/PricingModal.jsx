@@ -14,7 +14,6 @@ import { PricingTable } from "@clerk/nextjs";
 const PricingModal = ({ children }) => {
   return (
     <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="p-5  max-w-4xl w-full bg-white dark:bg-stone-900 border-stone-200 dark:border-stone-800">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
