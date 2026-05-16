@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Camera, Plus, X, Check, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -13,7 +13,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-// import ImageUploader from "@/components/ImageUploader";
+import ImageUploader from "@/components/ImageUploader";
 import useFetch from "@/hooks/use-fetch";
 import {
   scanPantryImage,
@@ -84,13 +84,13 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
   };
 
   // Reset modal state
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setActiveTab("scan");
     setSelectedImage(null);
     setScannedIngredients([]);
     setManualItem({ name: "", quantity: "" });
     onClose();
-  };
+  }, [onClose]);
 
   // Handle save success
   useEffect(() => {
@@ -99,7 +99,7 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
       handleClose();
       if (onSuccess) onSuccess();
     }
-  }, [saveData]);
+  }, [handleClose, onSuccess, saveData]);
 
   // Handle manual add
   const handleAddManual = async (e) => {
@@ -123,7 +123,7 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
       handleClose();
       if (onSuccess) onSuccess();
     }
-  }, [addData]);
+  }, [addData, handleClose, onSuccess]);
 
   // Remove scanned ingredient
   const removeIngredient = (index) => {
@@ -159,10 +159,10 @@ export default function AddToPantryModal({ isOpen, onClose, onSuccess }) {
             {scannedIngredients.length === 0 ? (
               // Step 1: Upload & Scan
               <div className="space-y-4">
-                {/* <ImageUploader
+                <ImageUploader
                   onImageSelect={handleImageSelect}
                   loading={scanning}
-                /> */}
+                />
 
                 {selectedImage && !scanning && (
                   <Button
