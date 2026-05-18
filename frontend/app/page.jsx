@@ -11,7 +11,7 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen bg-background text-foreground overflow-hidden">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 px-4">
-        <div className="absolute inset-0 -z-10 h-full w-full bg-white dark:bg-black bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]">
+        <div className="absolute inset-0 -z-10 h-full w-full bg-white dark:bg-black bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[24px_24px]">
            <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-primary/20 opacity-20 blur-[100px]"></div>
         </div>
         
@@ -21,7 +21,7 @@ export default async function Home() {
               <Sparkles className="w-4 h-4 mr-2" />
               Your AI Culinary Assistant
             </div>
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight lg:leading-[1.1] bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">
+            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight lg:leading-[1.1] bg-clip-text text-transparent bg-linear-to-r from-primary to-primary/60">
               Cook Smarter, Not Harder.
             </h1>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">

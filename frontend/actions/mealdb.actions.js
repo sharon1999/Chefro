@@ -1,6 +1,6 @@
 "use server";
 
-const MEALDB_BASE = "https://www.themealdb.com/api/json/v1/1";
+import { MEALDB_BASE } from "@/lib/constants";
 
 // Get random recipe of the day
 export async function getRecipeOfTheDay() {
