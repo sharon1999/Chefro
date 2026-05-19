@@ -7,7 +7,6 @@ import { request } from "@arcjet/next";
 import { STRAPI_URL, STRAPI_API_TOKEN } from "@/lib/constants";
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
@@ -23,21 +22,11 @@ function normalizeTitle(title) {
 // Helper function to fetch image from Unsplash
 async function fetchRecipeImage(recipeName) {
   try {
-    if (!UNSPLASH_ACCESS_KEY) {
-      console.warn("⚠️ UNSPLASH_ACCESS_KEY not set, skipping image fetch");
-      return "";
-    }
-
     const searchQuery = `${recipeName}`;
     const response = await fetch(
       `https://api.unsplash.com/search/photos?query=${encodeURIComponent(
         searchQuery
-      )}&per_page=1&orientation=landscape`,
-      {
-        headers: {
-          Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`,
-        },
-      }
+      )}&per_page=1&orientation=landscape`
     );
 
     if (!response.ok) {

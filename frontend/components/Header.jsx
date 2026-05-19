@@ -76,26 +76,28 @@ const Header = async () => {
 
           <Show when="signed-in">
             <div className="flex items-center gap-4">
-              <CustomUserButton />
-              {user && <PricingModal>
-              {user.subscriptionTier === "pro" ? (
-                <Button
-                  variant="outline"
-                  className="rounded-full shadow-sm hover:shadow hover:ring-2 ring-amber-500/20 transition-all active:scale-95 bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30 hover:bg-amber-500/20"
-                >
-                  <Star className="w-4 h-4 mr-2 fill-amber-500 text-amber-500" />
-                  Pro Plan
-                </Button>
-              ) : (
-                <Button
-                  variant="outline"
-                  className="rounded-full shadow-sm hover:shadow hover:ring-2 ring-primary/20 transition-all active:scale-95"
-                >
-                  <Star className="w-4 h-4 mr-2" />
-                  Upgrade
-                </Button>
+              {user && (
+                <PricingModal>
+                  {user.subscriptionTier === "pro" ? (
+                    <Button
+                      variant="outline"
+                      className="rounded-full shadow-sm hover:shadow hover:ring-2 ring-amber-500/20 transition-all active:scale-95 bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30 hover:bg-amber-500/20"
+                    >
+                      <Star className="w-4 h-4 mr-2 fill-amber-500 text-amber-500" />
+                      Pro Plan
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="outline"
+                      className="rounded-full shadow-sm hover:shadow hover:ring-2 ring-primary/20 transition-all active:scale-95"
+                    >
+                      <Star className="w-4 h-4 mr-2" />
+                      Upgrade
+                    </Button>
+                  )}
+                </PricingModal>
               )}
-            </PricingModal>}
+              <CustomUserButton />
             </div>
           </Show>
         </div>
